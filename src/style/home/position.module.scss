@@ -1,0 +1,20 @@
+@import "../variable.scss";
+@import "../mixins.scss";
+.position {
+  color: $content-fontcolor;
+  padding: 0.16rem 0.24rem 0.16rem 0;
+  position: relative;
+  line-height: 0.22rem;
+  font-size: 0.16rem;
+  @include ellipsis;
+  svg {
+    position: relative;
+    top: 0.01rem;
+    font-size: 0.2rem;
+    &:nth-child(2) {
+      position: absolute;
+      right: 0;
+      top: 0.17rem;
+    }
+  }
+}

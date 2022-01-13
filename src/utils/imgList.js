@@ -9,4 +9,15 @@ import qiandao from "../assets/qiandao.png";
 import dapai from "../assets/dapai.png";
 import hongbao from "../assets/hongbao.png";
 // eslint-disable-next-line prettier/prettier
-export default [chaoshi, caishichang, shuiguodian, xianhua, yiyao, jiaju, cake, qiandao, dapai, hongbao];
+export default [
+  chaoshi,
+  caishichang,
+  shuiguodian,
+  xianhua,
+  yiyao,
+  jiaju,
+  cake,
+  qiandao,
+  dapai,
+  hongbao,
+];
