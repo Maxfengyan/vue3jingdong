@@ -1,6 +1,7 @@
 import { defineComponent } from "vue";
 import style from "@/style/home/position.module.scss";
 const Position = defineComponent({
+  name: "Position",
   setup() {
     return () => {
       return (

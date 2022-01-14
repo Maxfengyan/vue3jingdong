@@ -6,6 +6,7 @@ import "normalize.css";
 import "./style/index.scss";
 import "./icons";
 import SvgIcon from "./components/SvgIcon";
+import "./core/permission";
 
 const app = createApp(App);
 app.component("svg-icon", SvgIcon);

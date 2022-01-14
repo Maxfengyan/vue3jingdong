@@ -1,0 +1,31 @@
+@import "../variable.scss";
+.docker {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top: 1px solid $content-bgColor;
+  height: 0.49rem;
+  padding: 0 18px;
+  box-sizing: border-box;
+  color: $content-fontcolor;
+}
+.docker_item {
+  flex: 1;
+  text-align: center;
+  span {
+    display: block;
+    font-size: 0.2rem;
+    transform: scale(50%);
+    transform-origin: center top;
+  }
+  svg {
+    font-size: 0.18rem;
+    margin: 0.07rem 0 0.02rem 0;
+  }
+}
+.docker_item--active {
+  color: #1fa4fc;
+}

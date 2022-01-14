@@ -1,0 +1,19 @@
+@import "../variable.scss";
+.icons {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 0.16rem;
+  color: $content-fontcolor;
+  .icons-item {
+    width: 20%;
+    img {
+      width: 0.4rem;
+      margin: 0 auto;
+      display: block;
+    }
+    p {
+      text-align: center;
+      margin: 0.06rem 0 0.16rem 0;
+    }
+  }
+}
