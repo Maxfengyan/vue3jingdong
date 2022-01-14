@@ -11,14 +11,9 @@
 </template>
 <script>
 import Components from "./component/index";
-import { getToken, setToken } from "@/core/auth.js";
 export default {
   name: "Home",
   components: Components,
-  setup() {
-    setToken(123123123)
-    console.log(getToken());
-  },
 };
 </script>
 <style lang="scss" scoped>

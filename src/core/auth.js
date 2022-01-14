@@ -3,13 +3,13 @@ import Cookies from "js-cookie";
 const Token = "vue3jingdong";
 
 export function getToken() {
-  Cookies.get(Token);
+  return Cookies.get(Token);
 }
 
 export function setToken(token) {
-  Cookies.set(Token, token);
+  return Cookies.set(Token, token);
 }
 
 export function removeToken() {
-  Cookies.remove(Token);
+  return Cookies.remove(Token);
 }

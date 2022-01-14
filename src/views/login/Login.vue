@@ -18,7 +18,7 @@ export default {
   name: "Login",
   setup() {
     const handleLogin = () => {
-      setToken("qdqwd");
+      setToken("MMMMM");
     };
     return { user, handleLogin };
   },
