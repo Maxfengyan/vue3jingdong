@@ -9,16 +9,46 @@
     </div>
     <div class="wrapper_login_button" @click="handleLogin">登录</div>
     <div class="wrapper_login_link" @click="handleRegisterClick">立即注册</div>
-    <toast-component :show-status="state.showStatus" :show-message="state.showMessage" />
+    <toast-component :show-status="toastData.showStatus" :show-message="toastData.showMessage" />
   </div>
 </template>
 <script>
-import user from "@/assets/user.png";
-import { login } from "@/api/user";
-import { setToken } from "../../core/auth";
-import { useRouter } from "vue-router";
 import { reactive } from "vue";
-import ToastComponent from "@/components/Toast/index";
+import { useRouter } from "vue-router";
+import { setToken } from "../../core/auth";
+import { login } from "@/api/user";
+import ToastComponent, { useToastEffect } from "@/components/Toast/index";
+import user from "@/assets/user.png";
+
+// 登录
+const useLoginEffect = (openToast) => {
+  const router = useRouter();
+  const state = reactive({
+    userName: "",
+    userPassword: "",
+  });
+  const handleLogin = () => {
+    if (state.userName && state.userPassword) {
+      login(state)
+        .then((res) => {
+          if (res.dataCode === "0000") {
+            setToken(res.data.token);
+            router.push({ name: "Home" });
+          } else {
+            openToast(res.dataResult);
+          }
+        })
+        .catch((error) => {
+          openToast("登录失败");
+        });
+    } else {
+      openToast("请输入用户名密码");
+    }
+  };
+
+  return { state, handleLogin };
+};
+
 export default {
   name: "Login",
   components: {
@@ -26,42 +56,13 @@ export default {
   },
   setup() {
     const router = useRouter();
-    const state = reactive({
-      userName: "",
-      userPassword: "",
-      showStatus: false,
-      showMessage: "",
-    });
-
-    const openToast = (text) => {
-      state.showStatus = true;
-      state.showMessage = text;
-      setTimeout(() => {
-        state.showStatus = false;
-        state.showMessage = "";
-      }, 1500);
-    };
-    // 登录
-    const handleLogin = () => {
-      if (state.userName && state.userPassword) {
-        login(state)
-          .then((res) => {
-            if (res.dataCode === "0000") {
-              setToken(res.data.token);
-              router.push({ name: "Home" });
-            }
-          })
-          .catch((error) => {
-            openToast("登录失败");
-          });
-      } else {
-        openToast("请输入用户名密码");
-      }
-    };
+    const { toastData, openToast } = useToastEffect();
+    const { state, handleLogin } = useLoginEffect(openToast);
+    // 跳转注册
     const handleRegisterClick = () => {
       router.push({ name: "Register" });
     };
-    return { user, state, handleLogin, handleRegisterClick };
+    return { user, state, toastData, handleLogin, handleRegisterClick };
   },
 };
 </script>

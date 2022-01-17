@@ -1,4 +1,4 @@
-import { defineComponent } from "vue";
+import { defineComponent, reactive } from "vue";
 import style from "./toast.module.scss";
 const Toast = defineComponent({
   props: {
@@ -23,5 +23,25 @@ const Toast = defineComponent({
     };
   },
 });
+export const useToastEffect = () => {
+  const toastData = reactive({
+    showStatus: false,
+    showMessage: "",
+    time: null,
+  });
+  const openToast = (text) => {
+    clearTimeout(toastData.time);
+    toastData.showStatus = true;
+    toastData.showMessage = text;
+    toastData.time = setTimeout(() => {
+      toastData.showStatus = false;
+      toastData.showMessage = "";
+    }, 1500);
+  };
+  return {
+    toastData,
+    openToast,
+  };
+};
 
 export default Toast;

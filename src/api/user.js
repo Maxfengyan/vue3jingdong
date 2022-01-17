@@ -7,3 +7,11 @@ export function login(data) {
     params: data,
   });
 }
+
+export function register(data) {
+  return service({
+    url: "/user/register.json",
+    method: "get",
+    params: data,
+  });
+}
