@@ -18,6 +18,18 @@ const routes = [
       }
     },
   },
+  {
+    path: "/register",
+    name: "Register",
+    component: () => import("@/views/register/Register.vue"),
+    beforeEnter(to, from, next) {
+      if (getToken()) {
+        next({ name: "Home" });
+      } else {
+        next();
+      }
+    },
+  },
 ];
 
 const router = createRouter({
