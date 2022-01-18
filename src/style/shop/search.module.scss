@@ -1,0 +1,36 @@
+.search {
+  margin: 0.14rem 0 0.04rem 0;
+  display: flex;
+  line-height: 0.32rem;
+}
+.search_back {
+  font-size: 0.3rem;
+  color: #b6b6b6;
+}
+.search_content {
+  flex: 1;
+  line-height: 0.32rem;
+  background-color: #f5f5f5;
+  display: flex;
+  border-radius: 0.16rem;
+  svg {
+    font-size: 0.25rem;
+    margin: 0.035rem 0.09rem;
+    color: #ccc;
+  }
+}
+
+.search_input {
+  width: 100%;
+  border: none;
+  background: none;
+  outline: none;
+  display: block;
+  padding-right: 0.2rem;
+  height: 0.32rem;
+  color: #333;
+  font-size: 0.14rem;
+  &::placeholder {
+    color: #333;
+  }
+}

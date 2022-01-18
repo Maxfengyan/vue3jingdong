@@ -1,0 +1,34 @@
+@import "@/style/variable.scss";
+.shop_item {
+  display: flex;
+  padding-top: 0.12rem;
+  img {
+    margin-right: 0.16rem;
+    width: 0.56rem;
+    height: 0.56rem;
+  }
+  .shop_content {
+    flex: 1;
+    padding-bottom: 0.12rem;
+    border-bottom: 1px solid $content-bgColor;
+
+    .shop_content_title {
+      line-height: 0.22rem;
+      font-size: 0.16rem;
+    }
+    .shop_content_tags {
+      line-height: 0.18rem;
+      margin-top: 0.08rem;
+      font-size: 0.13rem;
+      color: $content-fontcolor;
+      .shop_content_tag {
+        margin-right: 0.12rem;
+      }
+    }
+    .shop_content_heighlight {
+      color: #e93b3b;
+      line-height: 0.13rem;
+      margin: 0.08rem 0 0 0;
+    }
+  }
+}

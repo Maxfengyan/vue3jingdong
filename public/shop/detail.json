@@ -1,0 +1,13 @@
+{
+  "dataCode": "0000",
+  "dataResult": "获取成功",
+  "data": {
+    "_id": "1",
+    "name": "沃尔玛",
+    "imgUrl": "./near.png",
+    "sales": 10000,
+    "expressLimit": 0,
+    "expressPrice": 5,
+    "slogan": "VIP尊享满89元减4元运费券"
+  }
+}
