@@ -2,6 +2,7 @@ import { defineComponent } from "vue";
 import { useRouter } from "vue-router";
 import style from "@/style/shop/search.module.scss";
 const Search = defineComponent({
+  name: "ShopSearch",
   setup() {
     const router = useRouter();
     const handleBack = () => {

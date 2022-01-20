@@ -3,6 +3,7 @@
     <search-component />
     <shop-info :shop-item="state.itemShop" v-show="state.itemShop.imgUrl" />
     <content-component />
+    <cart-component />
   </div>
 </template>
 <script>
@@ -12,12 +13,14 @@ import ShopInfo from "../../components/ShopInfo";
 import { getDetail } from "../../api/shop";
 import SearchComponent from "./components/Search";
 import ContentComponent from "./components/Content";
+import CartComponent from "./components/Cart";
 export default {
   name: "Shop",
   components: {
     ShopInfo,
     SearchComponent,
     ContentComponent,
+    CartComponent,
   },
   setup() {
     const route = useRoute();

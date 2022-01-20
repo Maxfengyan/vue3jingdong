@@ -1,4 +1,5 @@
 @import "../mixins.scss";
+@import "../variable.scss";
 .content {
   display: flex;
   position: absolute;
@@ -62,7 +63,7 @@
   margin: 0;
   line-height: 0.2rem;
   font-size: 0.14rem;
-  color: #e93b3b;
+  color: $number-fontcolor;
 }
 
 .productPriceYen {

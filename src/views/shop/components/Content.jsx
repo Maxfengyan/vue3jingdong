@@ -1,15 +1,18 @@
-import { defineComponent, reactive } from "vue";
-import style from "@/style/shop/content.module.scss";
+import { computed, defineComponent, reactive } from "vue";
+import { useRoute } from "vue-router";
+import { useStore } from "vuex";
 import { getShopList } from "@/api/shop.js";
 import LoadingComponent from "@/components/Loading/index.jsx";
+import style from "@/style/shop/content.module.scss";
+
 const Content = defineComponent({
-  mounted() {
-    this.$loading.show("111111");
-  },
+  name: "ShopContent",
   components: {
     LoadingComponent,
   },
   setup() {
+    const store = useStore();
+    const route = useRoute();
     const state = reactive({
       categoryList: [
         {
@@ -38,9 +41,15 @@ const Content = defineComponent({
         },
       ],
       productList: [],
+      currentIndex: 0,
+      cartList: store.getters.cartList,
+      allPrice: store.getters.allPrice,
+      id: route.params.id,
     });
-    // 请求商品列表
-    const requestShopList = (id) => {
+
+    // 请求商品列表+切换
+    const requestShopList = (id, index) => {
+      state.currentIndex = index || 0;
       getShopList({ id: id }).then((res) => {
         if (res.dataCode === "0000") {
           state.productList = res.data;
@@ -48,14 +57,39 @@ const Content = defineComponent({
       });
     };
     requestShopList(0);
+
+    // 商品增加购物车
+    const handleShopAdd = (productId, price) => {
+      let data = {
+        shopId: route.params.id,
+        productId: productId,
+        price: price,
+      };
+      store.dispatch("cart/ChangeCartListAdd", data);
+    };
+
+    // 商品减少购物车
+    const handleShopreduce = (productId, price) => {
+      let data = {
+        shopId: route.params.id,
+        productId: productId,
+        price: price,
+      };
+      store.dispatch("cart/ChangeCartListReduce", data);
+    };
+
     return () => {
+      const allPrice = computed(() => {
+        return store.getters.allPrice;
+      });
       return (
         <div class={style.content}>
           <div class={style.category}>
+            {allPrice}
             {state.categoryList.map((item, index) => {
-              let className = style.categoryItem + " " + (index === 0 ? style.categoryItem_active : "");
+              let className = style.categoryItem + " " + (index === state.currentIndex ? style.categoryItem_active : "");
               return (
-                <div onClick={() => requestShopList(item.id)} class={className}>
+                <div onClick={() => requestShopList(item.id, index)} class={className}>
                   {item.name}
                 </div>
               );
@@ -76,9 +110,18 @@ const Content = defineComponent({
                     </p>
                   </div>
                   <div class={style.productNumber}>
-                    <span class={style.productNumber_minus}>-</span>
-                    <span class={style.productNumber_number}>0</span>
-                    <span class={style.productNumber_plus}>+</span>
+                    <span
+                      class={style.productNumber_minus}
+                      onClick={() => {
+                        handleShopreduce(item.id, item.price);
+                      }}
+                    >
+                      -
+                    </span>
+                    <span class={style.productNumber_number}>{state?.cartList?.[state.id]?.[item.id]?.count || 0} </span>
+                    <span class={style.productNumber_plus} onClick={() => handleShopAdd(item.id, item.price)}>
+                      +
+                    </span>
                   </div>
                 </div>
               );

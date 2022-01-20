@@ -1,6 +1,7 @@
 import { defineComponent, reactive } from "vue";
 import style from "./toast.module.scss";
 const Toast = defineComponent({
+  name: "Toast",
   props: {
     showStatus: {
       type: Boolean,

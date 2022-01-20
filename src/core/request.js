@@ -9,7 +9,7 @@ const service = Axios.create({
 
 service.interceptors.request.use(
   (config) => {
-    // app.config.globalProperties.$loading.show("1");
+    app.config.globalProperties.$loading.show("加载中...");
     config.headers["X-Token"] = getToken();
     return config;
   },
@@ -20,9 +20,11 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
   (response) => {
+    app.config.globalProperties.$loading.hide();
     return response.data;
   },
   (error) => {
+    app.config.globalProperties.$loading.hide();
     return Promise.reject(error);
   },
 );

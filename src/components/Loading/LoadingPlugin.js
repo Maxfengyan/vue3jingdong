@@ -8,9 +8,12 @@ const msg = reactive({
 const $loading = createApp(loading, { msg }).mount(document.createElement("div"));
 const load = {
   show(title) {
-    msg.title = title;
-    msg.show = true;
-    document.body.appendChild($loading.$el);
+    // 如果已经处于加载中，就不继续叠加遮罩了
+    if (!msg.show) {
+      msg.title = title;
+      msg.show = true;
+      document.body.appendChild($loading.$el);
+    }
   },
 
   hide() {
