@@ -9,7 +9,6 @@ const ShopInfo = defineComponent({
     },
   },
   setup(props) {
-    console.log(props);
     return () => {
       return (
         <div class={style.shop_item}>

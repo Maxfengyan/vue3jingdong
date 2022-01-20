@@ -1,5 +1,6 @@
 import Axios from "axios";
 import { getToken } from "./auth";
+import app from "@/main.js";
 // 创建axios
 const service = Axios.create({
   baseURL: "",
@@ -8,6 +9,7 @@ const service = Axios.create({
 
 service.interceptors.request.use(
   (config) => {
+    // app.config.globalProperties.$loading.show("1");
     config.headers["X-Token"] = getToken();
     return config;
   },

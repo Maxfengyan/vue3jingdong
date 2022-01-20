@@ -1,0 +1,13 @@
+{
+  "dataCode": "0000",
+  "dataResult": "获取成功",
+  "data": [
+    {
+      "imgUrl": "./near.png",
+      "name": "番茄250克",
+      "sales": 10,
+      "price": 26,
+      "origin": 33
+    }
+  ]
+}
