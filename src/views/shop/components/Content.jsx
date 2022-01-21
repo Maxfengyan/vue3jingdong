@@ -1,4 +1,4 @@
-import { computed, defineComponent, reactive } from "vue";
+import { defineComponent, reactive } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import { getShopList } from "@/api/shop.js";
@@ -59,33 +59,31 @@ const Content = defineComponent({
     requestShopList(0);
 
     // 商品增加购物车
-    const handleShopAdd = (productId, price) => {
+    const handleShopAdd = (productId, price, item) => {
       let data = {
         shopId: route.params.id,
         productId: productId,
         price: price,
+        item: item,
       };
       store.dispatch("cart/ChangeCartListAdd", data);
     };
 
     // 商品减少购物车
-    const handleShopreduce = (productId, price) => {
+    const handleShopreduce = (productId, price, item) => {
       let data = {
         shopId: route.params.id,
         productId: productId,
         price: price,
+        item: item,
       };
       store.dispatch("cart/ChangeCartListReduce", data);
     };
 
     return () => {
-      const allPrice = computed(() => {
-        return store.getters.allPrice;
-      });
       return (
         <div class={style.content}>
           <div class={style.category}>
-            {allPrice}
             {state.categoryList.map((item, index) => {
               let className = style.categoryItem + " " + (index === state.currentIndex ? style.categoryItem_active : "");
               return (
@@ -113,13 +111,13 @@ const Content = defineComponent({
                     <span
                       class={style.productNumber_minus}
                       onClick={() => {
-                        handleShopreduce(item.id, item.price);
+                        handleShopreduce(item.id, item.price, item);
                       }}
                     >
                       -
                     </span>
                     <span class={style.productNumber_number}>{state?.cartList?.[state.id]?.[item.id]?.count || 0} </span>
-                    <span class={style.productNumber_plus} onClick={() => handleShopAdd(item.id, item.price)}>
+                    <span class={style.productNumber_plus} onClick={() => handleShopAdd(item.id, item.price, item)}>
                       +
                     </span>
                   </div>
