@@ -2,11 +2,12 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import "normalize.css";
-import "./style/index.scss";
 import "./icons";
-import SvgIcon from "./components/SvgIcon";
+import "normalize.css";
+import "animate.css";
+import "./style/index.scss";
 import "./core/permission";
+import SvgIcon from "./components/SvgIcon";
 import LoadingPlugin from "./components/Loading/LoadingPlugin";
 
 const app = createApp(App);

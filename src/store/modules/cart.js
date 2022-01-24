@@ -47,18 +47,20 @@ const mutations = {
       state.cartList[data.shopId][data.productId].count = state.cartList[data.shopId][data.productId].count - 1;
     }
   },
-  // 取消选中
+  // 是否选中勾选
   SET_CARTCHECKED: (state, data) => {
     let checked = state.cartList[data.shopId][data.productId].checked;
     state.cartList[data.shopId][data.productId].checked = !checked;
-    if (!checked) {
+    if (!state.cartList[data.shopId][data.productId].checked) {
       state.cartList[data.shopId].selectAll = false;
     } else {
       let status = true;
       for (let key in state.cartList[data.shopId]) {
         let item = state.cartList[data.shopId][key];
-        if (!item.checked) {
-          status = false;
+        if (item.id) {
+          if (!item.checked) {
+            status = false;
+          }
         }
       }
       if (status) {
@@ -66,39 +68,65 @@ const mutations = {
       }
     }
   },
-  /* SET_CHANGEALLPRICE: (state, data) => {
-    state.allPrice = data.allPrice;
-    state.total = data.total;
-  }, */
-};
-
-const actions = {
-  /* ChangeAllPrice(context, data) {
-    var allPrice = 0;
-    var total = 0;
-    for (let key in state.cartList) {
-      let shopItem = state.cartList[key];
-      if (shopItem) {
-        for (let product in shopItem) {
-          let count = shopItem[product]?.count;
-          let price = shopItem[product]?.price;
-          if (count) {
-            allPrice = allPrice + price * count;
-            total = total + count;
+  // 购物车全选/取消
+  SET_CARTALLSELECT: (state, data) => {
+    const cart = state.cartList?.[data.shopId];
+    // 取消全选
+    if (cart.selectAll) {
+      if (cart) {
+        for (let key in cart) {
+          if (cart[key].checked && cart[key].id) {
+            cart[key].checked = false;
           }
         }
       }
+      cart.selectAll = false;
+    } else {
+      // 全选
+      if (cart) {
+        for (let key in cart) {
+          if (!cart[key].checked && cart[key].id) {
+            cart[key].checked = true;
+          }
+        }
+      }
+      cart.selectAll = true;
     }
-    context.commit("SET_CHANGEALLPRICE", { allPrice: allPrice, total: total });
-  }, */
+  },
+
+  // 清空购物车
+  SET_CLEARCART: (state, data) => {
+    let cart = state.cartList?.[data.shopId];
+    if (cart) {
+      for (let key in cart) {
+        if (cart[key].id) {
+          cart[key].count = 0;
+        }
+      }
+    }
+  },
+};
+
+const actions = {
+  // 购物车新增商品
   ChangeCartListAdd(context, data) {
     context.commit("SET_CARTLISTAdd", data);
   },
+  // 购物车减少商品
   ChangeCartListReduce(context, data) {
     context.commit("SET_CARTLISTREDUCE", data);
   },
+  //购物车商品勾选
   CartChecked(context, data) {
     context.commit("SET_CARTCHECKED", data);
+  },
+  // 购物车全选/取消
+  CartAllSelect(context, data) {
+    context.commit("SET_CARTALLSELECT", data);
+  },
+  // 清空购物车
+  ClearCart(context, data) {
+    context.commit("SET_CLEARCART", data);
   },
 };
 

@@ -40,5 +40,7 @@ export default {
 <style lang="scss" scoped>
 .wrapper {
   padding: 0 0.18rem;
+  height: 100%;
+  width: 100%;
 }
 </style>

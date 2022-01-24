@@ -1,4 +1,4 @@
-import { computed, defineComponent, reactive } from "vue";
+import { computed, defineComponent, ref, Transition } from "vue";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
 import style from "@/style/shop/cart.module.scss";
@@ -8,7 +8,10 @@ const Cart = defineComponent({
   setup() {
     const store = useStore();
     const route = useRoute();
+    const showCart = ref(false);
+    // 店铺ID
     const shopId = route.params.id;
+    // 购物车数据
     const cartList = store.getters.cartList;
     // 商品增加购物车
     const handleShopAdd = (productId, price, item) => {
@@ -64,57 +67,72 @@ const Cart = defineComponent({
       return buyList;
     });
 
+    // 全选
+    const handleAllSelect = () => {
+      store.dispatch("cart/CartAllSelect", { shopId: shopId });
+    };
+
     // 选择购物车商品结算
     const handleChecked = (productId) => {
       store.dispatch("cart/CartChecked", { shopId: shopId, productId: productId });
     };
+
+    // 清空购物车
+    const clearCart = () => {
+      store.dispatch("cart/ClearCart", { shopId: shopId });
+    };
+
     return () => {
-      let tracess = cartList[shopId]?.selectAll + "";
       return (
         <div class={style.cart}>
-          <div class={style.product}>
-            <div class={style.productHeader}>
-              <svg-icon onClick={() => handleChecked()} icon-class={cartList[shopId]?.selectAll ? "checked" : "sq-checked"} />
-              <span>全选</span>
-              <div class={style.clearCart}>清空购物车</div>
-            </div>
-            {currentCarList.value.map((item) => {
-              return (
-                <div class={style.productItem} v-show={item.count > 0}>
-                  <svg-icon onClick={() => handleChecked(item.id)} icon-class={item.checked ? "checked" : "sq-checked"} />
-                  <img src={item.imgUrl} />
-                  <div class={style.productItemDetail}>
-                    <h4 class={style.productTitle}>{item.name}</h4>
-                    <p class={style.productPrice}>
-                      <span class={style.productPriceYen}>&yen;</span>
-                      {item.price}
-                      <span class={style.productPriceOrigin}>&yen;{item.origin}</span>
-                    </p>
-                  </div>
-                  <div class={style.productNumber}>
-                    <span
-                      class={style.productNumber_minus}
-                      onClick={() => {
-                        handleShopreduce(item.id, item.price, item);
-                      }}
-                    >
-                      -
-                    </span>
-                    <span class={style.productNumber_number}>{item.count}</span>
-                    <span class={style.productNumber_plus} onClick={() => handleShopAdd(item.id, item.price, item)}>
-                      +
-                    </span>
-                  </div>
+          <Transition mode="in-out" duration={500} enter-active-class="animate__animated animate__bounceInUp" leave-active-class="animate__animated animate__bounceOutDown">
+            <div class={style.product} v-show={showCart.value}>
+              <div class={style.productHeader}>
+                <svg-icon onClick={() => handleAllSelect()} icon-class={cartList[shopId]?.selectAll ? "checked" : "sq-checked"} />
+                <span>全选</span>
+                <div class={style.clearCart} onClick={() => clearCart()}>
+                  清空购物车
                 </div>
-              );
-            })}
-          </div>
+              </div>
+              {currentCarList.value.map((item) => {
+                return (
+                  <div class={style.productItem} v-show={item.count > 0}>
+                    <svg-icon onClick={() => handleChecked(item.id)} icon-class={item.checked ? "checked" : "sq-checked"} />
+                    <img src={item.imgUrl} />
+                    <div class={style.productItemDetail}>
+                      <h4 class={style.productTitle}>{item.name}</h4>
+                      <p class={style.productPrice}>
+                        <span class={style.productPriceYen}>&yen;</span>
+                        {item.price}
+                        <span class={style.productPriceOrigin}>&yen;{item.origin}</span>
+                      </p>
+                    </div>
+                    <div class={style.productNumber}>
+                      <span
+                        class={style.productNumber_minus}
+                        onClick={() => {
+                          handleShopreduce(item.id, item.price, item);
+                        }}
+                      >
+                        -
+                      </span>
+                      <span class={style.productNumber_number}>{item.count}</span>
+                      <span class={style.productNumber_plus} onClick={() => handleShopAdd(item.id, item.price, item)}>
+                        +
+                      </span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </Transition>
+
           <div class={style.check}>
-            <div class={style.check_icon}>
+            <div class={style.check_icon} onClick={() => (showCart.value = !showCart.value)}>
               <img src={basket} />
               <div class={style.check_icon_tag}>{total.value}</div>
             </div>
-            <div class={style.check_info}>
+            <div class={style.check_info} onClick={() => (showCart.value = !showCart.value)}>
               总计: <span class={style.check_info_price}>&yen; {allPrice.value}</span>
             </div>
             <div class={style.check_btn}>去结算</div>

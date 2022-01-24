@@ -5,9 +5,11 @@
   left: 0;
   right: 0;
   bottom: 0;
+  width: 100%;
 }
 
 .check {
+  z-index: 9;
   line-height: 0.5rem;
   display: flex;
   height: 0.49rem;
@@ -60,6 +62,7 @@
   flex: 1;
   background-color: #fff;
   border-top: 0.01rem solid #f1f1f1;
+  width: 100%;
 }
 .productItem {
   position: relative;
