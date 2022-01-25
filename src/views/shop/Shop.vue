@@ -3,7 +3,7 @@
     <search-component />
     <shop-info :shop-item="state.itemShop" v-show="state.itemShop.imgUrl" />
     <content-component />
-    <cart-component />
+    <cart-component v-if="state.itemShop.name" :shop-name="state.itemShop.name" />
   </div>
 </template>
 <script>

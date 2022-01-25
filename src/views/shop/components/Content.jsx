@@ -2,14 +2,10 @@ import { defineComponent, reactive } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import { getShopList } from "@/api/shop.js";
-import LoadingComponent from "@/components/Loading/index.jsx";
 import style from "@/style/shop/content.module.scss";
 
 const Content = defineComponent({
   name: "ShopContent",
-  components: {
-    LoadingComponent,
-  },
   setup() {
     const store = useStore();
     const route = useRoute();

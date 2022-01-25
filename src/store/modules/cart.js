@@ -1,5 +1,6 @@
+import { getCart, setCart, removeCart } from "@/core/auth.js";
 const state = {
-  cartList: {},
+  cartList: getCart(),
 };
 
 const mutations = {
@@ -24,6 +25,7 @@ const mutations = {
       }
     }
     state.cartList[data.shopId][data.productId].count = state.cartList[data.shopId][data.productId].count + 1;
+    setCart(state.cartList);
   },
   SET_CARTLISTREDUCE: (state, data) => {
     let count = state?.cartList?.[data.shopId]?.[data.productId]?.count;
@@ -46,6 +48,7 @@ const mutations = {
     } else {
       state.cartList[data.shopId][data.productId].count = state.cartList[data.shopId][data.productId].count - 1;
     }
+    setCart(state.cartList);
   },
   // 是否选中勾选
   SET_CARTCHECKED: (state, data) => {
@@ -67,6 +70,7 @@ const mutations = {
         state.cartList[data.shopId].selectAll = true;
       }
     }
+    setCart(state.cartList);
   },
   // 购物车全选/取消
   SET_CARTALLSELECT: (state, data) => {
@@ -92,6 +96,7 @@ const mutations = {
       }
       cart.selectAll = true;
     }
+    setCart(state.cartList);
   },
 
   // 清空购物车
@@ -103,6 +108,21 @@ const mutations = {
           cart[key].count = 0;
         }
       }
+    }
+
+    setCart(state.cartList);
+  },
+
+  // 生成购物车
+  // 处理的有点业余
+  SET_SAVECART: (state, data) => {
+    // state.cartList = data.cartList;
+    if (!state.cartList[data.shopId]) {
+      state.cartList[data.shopId] = {};
+      state.cartList[data.shopId].name = data.name;
+      state.cartList[data.shopId].selectAll = true;
+    } else {
+      state.cartList[data.shopId].name = data.name;
     }
   },
 };
@@ -127,6 +147,10 @@ const actions = {
   // 清空购物车
   ClearCart(context, data) {
     context.commit("SET_CLEARCART", data);
+  },
+  // 生成购物车
+  SaveCart(context, data) {
+    context.commit("SET_SAVECART", data);
   },
 };
 

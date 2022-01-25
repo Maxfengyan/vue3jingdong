@@ -1,5 +1,6 @@
 import Cookies from "js-cookie";
 
+// 操作登录token
 const Token = "vue3jingdong";
 
 export function getToken() {
@@ -12,4 +13,19 @@ export function setToken(token) {
 
 export function removeToken() {
   return Cookies.remove(Token);
+}
+
+// 操作购物车
+
+const Cart = "vue3CartList";
+export function getCart() {
+  return JSON.parse(localStorage.getItem(Cart) || "{}");
+}
+
+export function setCart(data) {
+  return localStorage.setItem(Cart, JSON.stringify(data));
+}
+
+export function removeCart() {
+  localStorage.removeItem(Cart);
 }
