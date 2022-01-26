@@ -40,6 +40,11 @@ const routes = [
     name: "CartList",
     component: () => import("@/views/cartList/CartList.vue"),
   },
+  {
+    path: "/orderConfirm/:shopId",
+    name: "OrderConfirm",
+    component: () => import("@/views/orderConfirm/OrderConfirm.vue"),
+  },
 ];
 
 const router = createRouter({

@@ -1,0 +1,23 @@
+.order {
+  display: flex;
+  height: 0.49rem;
+  line-height: 0.49rem;
+  background-color: #fff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  .order_price {
+    flex: 1;
+    font-size: 0.14rem;
+    color: #333;
+    text-indent: 0.24rem;
+  }
+  .order_btn {
+    width: 0.98rem;
+    background-color: #4fb0f9;
+    font-size: 0.14rem;
+    text-align: center;
+    color: #fff;
+  }
+}

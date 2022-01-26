@@ -1,30 +1,21 @@
-import { defineComponent, reactive } from "vue";
+import { defineComponent } from "vue";
 import style from "./toast.module.scss";
 const Toast = defineComponent({
   name: "Toast",
   props: {
-    showStatus: {
-      type: Boolean,
-      default: false,
-      required: true,
-    },
-    showMessage: {
-      type: String,
-      default: "",
-      required: true,
-    },
+    msg: Object,
   },
   setup(props) {
     return () => {
       return (
-        <div id={style.toast} v-show={props.showStatus}>
-          {props.showMessage}
+        <div id={style.toast} v-show={props.msg.showStatus}>
+          {props.msg.showMessage}
         </div>
       );
     };
   },
 });
-export const useToastEffect = () => {
+/* export const useToastEffect = () => {
   const toastData = reactive({
     showStatus: false,
     showMessage: "",
@@ -43,6 +34,6 @@ export const useToastEffect = () => {
     toastData,
     openToast,
   };
-};
+}; */
 
 export default Toast;

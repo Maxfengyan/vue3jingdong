@@ -1,7 +1,7 @@
-import { computed, defineComponent, ref, Transition } from "vue";
+import { computed, defineComponent, ref, Transition, getCurrentInstance } from "vue";
 import { getCart } from "@/core/auth.js";
 import { useStore } from "vuex";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import style from "@/style/shop/cart.module.scss";
 import basket from "@/assets/basket.png";
 const Cart = defineComponent({
@@ -13,8 +13,10 @@ const Cart = defineComponent({
     },
   },
   setup(props) {
+    const { appContext } = getCurrentInstance();
     const store = useStore();
     const route = useRoute();
+    const router = useRouter();
     const showCart = ref(false);
     // 店铺ID
     const shopId = route.params.id;
@@ -92,6 +94,17 @@ const Cart = defineComponent({
       store.dispatch("cart/ClearCart", { shopId: shopId });
     };
 
+    // 去结算
+    const jumpToOrderConfirm = () => {
+      if (total.value > 0) {
+        router.push({
+          name: "OrderConfirm",
+          params: { shopId },
+        });
+      } else {
+        appContext.config.globalProperties.$toast.show("请选择商品");
+      }
+    };
     return () => {
       return (
         <Fragment>
@@ -147,7 +160,9 @@ const Cart = defineComponent({
               <div class={style.check_info} onClick={() => (showCart.value = !showCart.value)}>
                 总计: <span class={style.check_info_price}>&yen; {allPrice.value}</span>
               </div>
-              <div class={style.check_btn}>去结算</div>
+              <div class={style.check_btn} onClick={() => jumpToOrderConfirm()}>
+                去结算
+              </div>
             </div>
           </div>
         </Fragment>

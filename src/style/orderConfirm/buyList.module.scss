@@ -1,0 +1,44 @@
+@import "../mixins.scss";
+@import "../variable.scss";
+.product {
+  padding: 0 0.02rem 0.2rem 0.02rem;
+  overflow-y: scroll;
+  position: absolute;
+  bottom: 0.49rem;
+  top: 2.2rem;
+  left: 0;
+  right: 0;
+}
+.product_title {
+  background-color: #fff;
+  margin: 0 0.16rem;
+  padding: 0.16rem 0 0.05rem 0.16rem;
+  font-size: 0.16rem;
+}
+.productItem {
+  position: relative;
+  display: flex;
+  padding: 0.14rem;
+  margin: 0 0.16rem;
+  border-bottom: 0.01rem solid #f1f1f1;
+  background-color: #fff;
+  img {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 4px;
+    margin-right: 0.16rem;
+  }
+}
+
+.productPrice {
+  margin: 0.13rem 0 0 0;
+  line-height: 0.2rem;
+  font-size: 0.14rem;
+  color: $number-fontcolor;
+}
+.productAllPrice {
+  position: absolute;
+  right: 0.2rem;
+  color: #333;
+  font-size: 0.12rem;
+}

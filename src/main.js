@@ -9,12 +9,14 @@ import "./style/index.scss";
 import "./core/permission";
 import SvgIcon from "./components/SvgIcon";
 import LoadingPlugin from "./components/Loading/LoadingPlugin";
+import ToastPlugin from "./components/Toast/ToastPlugin";
 
 const app = createApp(App);
 app.component("svg-icon", SvgIcon);
 app.use(store);
 app.use(router);
 app.use(LoadingPlugin);
+app.use(ToastPlugin);
 app.mount("#app");
 
 export default app;
