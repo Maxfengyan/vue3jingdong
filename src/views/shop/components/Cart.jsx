@@ -21,7 +21,9 @@ const Cart = defineComponent({
     // 店铺ID
     const shopId = route.params.id;
     // 购物车数据
-    const cartList = store.getters.cartList;
+    const cartList = computed(() => {
+      return store.getters.cartList;
+    });
 
     // 读取缓存购物车信息&&设置name
     store.dispatch("cart/SaveCart", { name: props.shopName, shopId: shopId, cartList: getCart() });
@@ -51,8 +53,8 @@ const Cart = defineComponent({
     // 获取总数量
     const total = computed(() => {
       let totalItem = 0;
-      for (let key in cartList?.[shopId]) {
-        let item = cartList?.[shopId][key];
+      for (let key in cartList.value?.[shopId]) {
+        let item = cartList.value?.[shopId][key];
         if (item && item.count && item.checked) {
           totalItem = totalItem + item.count;
         }
@@ -62,8 +64,8 @@ const Cart = defineComponent({
     // 获取总价格
     const allPrice = computed(() => {
       let priceItem = 0;
-      for (let key in cartList?.[shopId]) {
-        let item = cartList?.[shopId][key];
+      for (let key in cartList.value?.[shopId]) {
+        let item = cartList.value?.[shopId][key];
         if (item && item.count && item.checked) {
           priceItem = priceItem + item.count * item.price;
         }
@@ -74,8 +76,8 @@ const Cart = defineComponent({
     // 获取购物车内容
     const currentCarList = computed(() => {
       let buyList = [];
-      for (let key in cartList?.[shopId]) {
-        buyList.push(cartList?.[shopId][key]);
+      for (let key in cartList.value?.[shopId]) {
+        buyList.push(cartList.value?.[shopId][key]);
       }
       return buyList;
     });
@@ -113,7 +115,7 @@ const Cart = defineComponent({
             <Transition mode="in-out" duration={500} enter-active-class="animate__animated animate__bounceInUp" leave-active-class="animate__animated animate__bounceOutDown">
               <div class={style.product} v-show={showCart.value && total.value > 0}>
                 <div class={style.productHeader}>
-                  <svg-icon onClick={() => handleAllSelect()} icon-class={cartList[shopId]?.selectAll ? "checked" : "sq-checked"} />
+                  <svg-icon onClick={() => handleAllSelect()} icon-class={cartList.value[shopId]?.selectAll ? "checked" : "sq-checked"} />
                   <span>全选</span>
                   <div class={style.clearCart} onClick={() => clearCart()}>
                     清空购物车

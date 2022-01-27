@@ -1,7 +1,7 @@
 import { defineComponent, reactive } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
-import { getShopList } from "@/api/shop.js";
+import { getShopList, getShopList1 } from "@/api/shop.js";
 import style from "@/style/shop/content.module.scss";
 
 const Content = defineComponent({
@@ -46,11 +46,19 @@ const Content = defineComponent({
     // 请求商品列表+切换
     const requestShopList = (id, index) => {
       state.currentIndex = index || 0;
-      getShopList({ id: id }).then((res) => {
-        if (res.dataCode === "0000") {
-          state.productList = res.data;
-        }
-      });
+      getShopList({ id: id })
+        .then((res) => {
+          if (res.dataCode === "0000") {
+            state.productList = res.data;
+          }
+        })
+        .catch(() => {
+          getShopList1().then((res) => {
+            if (res.dataCode === "0000") {
+              state.productList = res.data;
+            }
+          });
+        });
     };
     requestShopList(0);
 

@@ -7,7 +7,6 @@
     <div class="gap"></div>
     <nearby-component />
   </div>
-  <docker-component />
 </template>
 <script>
 import Components from "./component/index";

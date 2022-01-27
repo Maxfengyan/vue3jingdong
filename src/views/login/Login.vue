@@ -9,19 +9,19 @@
     </div>
     <div class="wrapper_login_button" @click="handleLogin">登录</div>
     <div class="wrapper_login_link" @click="handleRegisterClick">立即注册</div>
-    <toast-component :show-status="toastData.showStatus" :show-message="toastData.showMessage" />
   </div>
 </template>
 <script>
-import { reactive } from "vue";
+import { reactive, getCurrentInstance } from "vue";
 import { useRouter } from "vue-router";
 import { setToken } from "../../core/auth";
 import { login } from "@/api/user";
-import ToastComponent, { useToastEffect } from "@/components/Toast/index";
 import user from "@/assets/user.png";
 
 // 登录
-const useLoginEffect = (openToast) => {
+const useLoginEffect = (appContext) => {
+  const $toast = appContext.config.globalProperties.$toast;
+  console.log($toast);
   const router = useRouter();
   const state = reactive({
     userName: "",
@@ -35,14 +35,14 @@ const useLoginEffect = (openToast) => {
             setToken(res.data.token);
             router.push({ name: "Home" });
           } else {
-            openToast(res.dataResult);
+            $toast.show(res.dataResult);
           }
         })
         .catch((error) => {
-          openToast("登录失败");
+          $toast.show("登录失败");
         });
     } else {
-      openToast("请输入用户名密码");
+      $toast.show("请输入用户名密码");
     }
   };
 
@@ -51,18 +51,15 @@ const useLoginEffect = (openToast) => {
 
 export default {
   name: "Login",
-  components: {
-    ToastComponent,
-  },
   setup() {
     const router = useRouter();
-    const { toastData, openToast } = useToastEffect();
-    const { state, handleLogin } = useLoginEffect(openToast);
+    const { appContext } = getCurrentInstance();
+    const { state, handleLogin } = useLoginEffect(appContext);
     // 跳转注册
     const handleRegisterClick = () => {
       router.push({ name: "Register" });
     };
-    return { user, state, toastData, handleLogin, handleRegisterClick };
+    return { user, state, handleLogin, handleRegisterClick };
   },
 };
 </script>

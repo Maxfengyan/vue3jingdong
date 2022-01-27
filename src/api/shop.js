@@ -15,3 +15,10 @@ export function getShopList(id) {
     params: id,
   });
 }
+export function getShopList1(id) {
+  return service({
+    url: "/shop/shopList.json",
+    method: "get",
+    params: id,
+  });
+}

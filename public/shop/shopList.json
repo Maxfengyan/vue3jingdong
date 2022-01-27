@@ -3,11 +3,53 @@
   "dataResult": "获取成功",
   "data": [
     {
-      "imgUrl": "./near.png",
+      "imgUrl": "./fanqie.jpg",
       "name": "番茄250克",
+      "id": 123,
       "sales": 10,
       "price": 26,
       "origin": 33
+    },
+    {
+      "imgUrl": "./yumi.jpg",
+      "name": "玉米",
+      "id": 456,
+      "sales": 22,
+      "price": 11,
+      "origin": 65
+    },
+    {
+      "imgUrl": "./huanggua.jpg",
+      "name": "黄瓜",
+      "id": 789,
+      "sales": 44,
+      "price": 23,
+      "origin": 51
+    },
+    {
+      "imgUrl": "./dadou.jpg",
+      "name": "大豆",
+      "id": 143,
+      "sales": 51,
+      "price": 21,
+      "origin": 144
+    },
+    {
+      "imgUrl": "./youmaicai.jpg",
+      "name": "油麦菜",
+      "sales": 5,
+      "id": 190,
+      "price": 21,
+      "origin": 41
+    },
+    {
+      "imgUrl": "./jidan.jpg",
+      "name": "笨鸡蛋",
+      "id": 152,
+      "sales": 41,
+      "price": 221,
+      "origin": 1114
     }
-  ]
+  ],
+  "desc": "成功"
 }

@@ -1,4 +1,4 @@
-import { getCart, setCart, removeCart } from "@/core/auth.js";
+import { getCart, setCart } from "@/core/auth.js";
 const state = {
   cartList: getCart(),
 };

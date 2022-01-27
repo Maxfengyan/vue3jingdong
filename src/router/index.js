@@ -3,8 +3,26 @@ import { getToken } from "@/core/auth";
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: () => import("@/views/home/Home.vue"),
+    name: "Index",
+    redirect: "/home",
+    component: () => import("@/views/docker/Index.vue"),
+    children: [
+      {
+        path: "/home",
+        name: "Home",
+        component: () => import("@/views/home/Home.vue"),
+      },
+      {
+        path: "/cartList",
+        name: "CartList",
+        component: () => import("@/views/cartList/CartList.vue"),
+      },
+      {
+        path: "/orderList",
+        name: "OrderList",
+        component: () => import("@/views/orderList/OrderList.vue"),
+      },
+    ],
   },
   {
     path: "/shop/:id",
@@ -34,11 +52,6 @@ const routes = [
         next();
       }
     },
-  },
-  {
-    path: "/cartList",
-    name: "CartList",
-    component: () => import("@/views/cartList/CartList.vue"),
   },
   {
     path: "/orderConfirm/:shopId",

@@ -20,7 +20,13 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
   (response) => {
-    app.config.globalProperties.$loading.hide();
+    if (response.config.url === "/pay/pay.json") {
+      setTimeout(() => {
+        app.config.globalProperties.$loading.hide();
+      }, 1000);
+    } else {
+      app.config.globalProperties.$loading.hide();
+    }
     return response.data;
   },
   (error) => {

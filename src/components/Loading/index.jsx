@@ -15,7 +15,7 @@ const Loading = defineComponent({
       return (
         <div class={style.loading} v-show={props.msg.show}>
           <div>
-            <svg-icon icon-class="load" />
+            <svg-icon icon-class={props.msg.icon} />
             <span>{props.msg.title}</span>
           </div>
         </div>

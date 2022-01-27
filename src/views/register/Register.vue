@@ -12,19 +12,18 @@
     </div>
     <div class="wrapper_register_button" @click="handleRegister">注册</div>
     <div class="wrapper_register_link" @click="handleLoginClick">已有账号去登录</div>
-    <toast-component :show-status="toastData.showStatus" :show-message="toastData.showMessage" />
   </div>
 </template>
 <script>
-import { reactive } from "vue";
+import { reactive, getCurrentInstance } from "vue";
 import { useRouter } from "vue-router";
 import { register } from "@/api/user";
 import { setToken } from "../../core/auth";
-import ToastComponent, { useToastEffect } from "@/components/Toast/index";
 import user from "@/assets/user.png";
 
 // 注册
-const useRegisterEffect = (openToast) => {
+const useRegisterEffect = (appContext) => {
+  const $toast = appContext.config.globalProperties.$toast;
   const router = useRouter();
   const state = reactive({
     userName: "",
@@ -33,7 +32,7 @@ const useRegisterEffect = (openToast) => {
   });
   const handleRegister = () => {
     if (state.userPassword !== state.confirmPassword) {
-      openToast("两次输入密码不一致");
+      $toast.show("两次输入密码不一致");
       return false;
     }
     if (state.userName && state.userPassword) {
@@ -43,14 +42,14 @@ const useRegisterEffect = (openToast) => {
             setToken(res.data.token);
             router.push({ name: "Home" });
           } else {
-            openToast(res.dataResult);
+            $toast.show(res.dataResult);
           }
         })
         .catch((error) => {
-          openToast("注册失败");
+          $toast.show("注册失败");
         });
     } else {
-      openToast("请输入用户名密码");
+      $toast.show("请输入用户名密码");
     }
   };
 
@@ -58,18 +57,15 @@ const useRegisterEffect = (openToast) => {
 };
 export default {
   name: "Register",
-  components: {
-    ToastComponent,
-  },
   setup() {
     const router = useRouter();
-    const { toastData, openToast } = useToastEffect();
-    const { state, handleRegister } = useRegisterEffect(openToast);
+    const { appContext } = getCurrentInstance();
+    const { state, handleRegister } = useRegisterEffect(appContext);
 
     const handleLoginClick = () => {
       router.push({ name: "Login" });
     };
-    return { state, user, toastData, handleRegister, handleLoginClick };
+    return { state, user, handleRegister, handleLoginClick };
   },
 };
 </script>

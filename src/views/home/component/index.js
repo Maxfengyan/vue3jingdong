@@ -3,7 +3,6 @@ import SearchComponent from "./Search.jsx";
 import BannerComponent from "./Banner.jsx";
 import IconsComponent from "./Icons.jsx";
 import NearbyComponent from "./Nearby.jsx";
-import DockerComponent from "./Docker.jsx";
 
 export default {
   PositionComponent,
@@ -11,5 +10,4 @@ export default {
   BannerComponent,
   IconsComponent,
   NearbyComponent,
-  DockerComponent,
 };
