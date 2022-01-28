@@ -12,6 +12,11 @@
       var ratio = width / 375;
       var fontSize = 100 * ratio;
       document.getElementsByTagName("html")[0].style["font-size"] = fontSize + "px";
+      // 监听自动刷新一下
+      function onResize() {
+        window.location.reload();
+      }
+      window.addEventListener("resize", onResize);
     </script>
   </head>
   <body>

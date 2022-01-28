@@ -1,7 +1,8 @@
 ##### project: vue3jingdong
 ##### desc: 根据京东到家app UI用vue3模仿开发h5页面
-##### skill：vue3/vue-router/vuex/mitt/js-cookie/axios/vue-cli
-
+##### skill：vue3/vue-router/jsx/vuex/mitt/js-cookie/axios/vue-cli
+##### jsx+setup绝配！
+##### 预览地址(pc端打开控制台调整为移动端模式预览)：[gitee](http://maxfengyan.gitee.io/vue3study/#/home)
 ##### 项目目录
 ```
 |— design                            // 设计图ui
