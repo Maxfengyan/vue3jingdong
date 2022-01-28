@@ -8,7 +8,7 @@ export default {
 </script>
 <style>
 html {
-  -webkit-text-size-adjust: 100%;
+  /* -webkit-text-size-adjust: 100%; */
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   height: 100%;
 }

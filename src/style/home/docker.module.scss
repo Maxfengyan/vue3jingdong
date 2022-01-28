@@ -6,9 +6,9 @@
   bottom: 0;
   left: 0;
   right: 0;
-  border-top: 1px solid $content-bgColor;
+  border-top: 0.01rem solid $content-bgColor;
   height: 0.49rem;
-  padding: 0 18px;
+  padding: 0 0.18rem;
   box-sizing: border-box;
   color: $content-fontcolor;
 }
@@ -17,13 +17,15 @@
   text-align: center;
   span {
     display: block;
-    font-size: 0.2rem;
-    transform: scale(50%);
+    font-size: 0.12rem;
+    /* transform: scale(50%);
+    -webkit-transform: scale(50%);
     transform-origin: center top;
+    -webkit-transform-origin: center top; */
   }
   svg {
     font-size: 0.18rem;
-    margin: 0.07rem 0 0.02rem 0;
+    margin: 0.07rem 0 0.06rem 0;
   }
 }
 .docker_item--active {

@@ -25,7 +25,7 @@
     font-size: 0.14rem;
     line-height: 0.2rem;
     text-align: center;
-    border-radius: 8px;
+    border-radius: 0.08rem;
   }
   svg {
     display: block;
@@ -36,6 +36,15 @@
     // animation: van-rotate 4s cubic-bezier(1, 1.47, 1, 1) infinite;
   }
   @keyframes van-rotate {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @-webkit-keyframes van-rotate {
     from {
       transform: rotate(0deg);
     }

@@ -76,6 +76,7 @@ export default {
   top: 50%;
   left: 0;
   right: 0;
+  -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
   img {
     display: block;
@@ -85,13 +86,14 @@ export default {
   }
   .wrapper_input {
     background: #f9f9f9;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 6px;
+    border: 0.01rem solid rgba(0, 0, 0, 0.1);
+    border-radius: 0.06rem;
     height: 0.48rem;
     margin: 0 0.4rem 0.16rem 0.4rem;
     input {
       width: 100%;
-      line-height: 0.48rem;
+      line-height: 0.22rem;
+      margin-top: 0.12rem;
       background: transparent;
       border: none;
       padding: 0 0.16rem;

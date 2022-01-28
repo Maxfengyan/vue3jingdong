@@ -21,7 +21,6 @@ import user from "@/assets/user.png";
 // 登录
 const useLoginEffect = (appContext) => {
   const $toast = appContext.config.globalProperties.$toast;
-  console.log($toast);
   const router = useRouter();
   const state = reactive({
     userName: "",
@@ -71,6 +70,7 @@ export default {
   left: 0;
   right: 0;
   transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
   img {
     display: block;
     width: 0.66rem;
@@ -79,13 +79,14 @@ export default {
   }
   .wrapper_input {
     background: #f9f9f9;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 6px;
+    border: 0.01rem solid rgba(0, 0, 0, 0.1);
+    border-radius: 0.06rem;
     height: 0.48rem;
     margin: 0 0.4rem 0.16rem 0.4rem;
     input {
       width: 100%;
-      line-height: 0.48rem;
+      line-height: 0.22rem;
+      margin-top: 0.12rem;
       background: transparent;
       border: none;
       padding: 0 0.16rem;

@@ -6,7 +6,7 @@
   background-repeat: no-repeat;
   .top_header {
     position: relative;
-    padding-top: 0.26rem;
+    padding-top: 0.2rem;
     line-height: 0.24rem;
     color: #fff;
     text-align: center;
@@ -53,6 +53,7 @@
       color: #666;
       font-size: 0.2rem;
       transform: rotate(180deg);
+      -webkit-transform: rotate(180deg);
     }
   }
 }

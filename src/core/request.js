@@ -3,7 +3,7 @@ import { getToken } from "./auth";
 import app from "@/main.js";
 // 创建axios
 const service = Axios.create({
-  baseURL: "",
+  baseURL: window.apiUrl,
   withCredentials: true,
 });
 

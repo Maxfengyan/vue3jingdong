@@ -55,7 +55,7 @@ const Cart = defineComponent({
       let totalItem = 0;
       for (let key in cartList.value?.[shopId]) {
         let item = cartList.value?.[shopId][key];
-        if (item && item.count && item.checked) {
+        if (item && item.count) {
           totalItem = totalItem + item.count;
         }
       }
@@ -110,6 +110,7 @@ const Cart = defineComponent({
     return () => {
       return (
         <Fragment>
+          {total.value}
           <div class={style.mask} v-show={showCart.value && total.value > 0} onClick={() => (showCart.value = false)}></div>
           <div class={style.cart}>
             <Transition mode="in-out" duration={500} enter-active-class="animate__animated animate__bounceInUp" leave-active-class="animate__animated animate__bounceOutDown">
@@ -141,11 +142,11 @@ const Cart = defineComponent({
                             handleShopreduce(item.id, item.price, item);
                           }}
                         >
-                          -
+                          <svg-icon icon-class="move" />
                         </span>
                         <span class={style.productNumber_number}>{item.count}</span>
                         <span class={style.productNumber_plus} onClick={() => handleShopAdd(item.id, item.price, item)}>
-                          +
+                          <svg-icon icon-class="add" />
                         </span>
                       </div>
                     </div>

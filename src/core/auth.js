@@ -19,13 +19,17 @@ export function removeToken() {
 
 const Cart = "vue3CartList";
 export function getCart() {
-  return JSON.parse(localStorage.getItem(Cart) || "{}");
+  const cartList = JSON.parse(Cookies.get(Cart) || "{}") || JSON.parse(localStorage.getItem(Cart) || "{}") || {};
+  return cartList;
 }
 
 export function setCart(data) {
+  localStorage.setItem(Cart, JSON.stringify(data));
+  Cookies.set(Cart, JSON.stringify(data));
   return localStorage.setItem(Cart, JSON.stringify(data));
 }
 
 export function removeCart() {
   localStorage.removeItem(Cart);
+  Cookies.remove(Cart);
 }

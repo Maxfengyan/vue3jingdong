@@ -8,7 +8,6 @@ const BuyList = defineComponent({
   setup() {
     const route = useRoute();
     const shopId = route.params.shopId;
-
     const name = computed(() => {
       return getCart()?.[shopId]?.name || "";
     });

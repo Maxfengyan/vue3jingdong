@@ -118,11 +118,11 @@ const Content = defineComponent({
                         handleShopreduce(item.id, item.price, item);
                       }}
                     >
-                      -
+                      <svg-icon icon-class="move" />
                     </span>
                     <span class={style.productNumber_number}>{state?.cartList?.[state.id]?.[item.id]?.count || 0} </span>
                     <span class={style.productNumber_plus} onClick={() => handleShopAdd(item.id, item.price, item)}>
-                      +
+                      <svg-icon icon-class="add" />
                     </span>
                   </div>
                 </div>
