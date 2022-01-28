@@ -1,0 +1,24 @@
+{
+  "dataCode": "0000",
+  "dataResult": "获取成功",
+  "data": [
+    {
+      "_id": "1",
+      "name": "沃尔玛",
+      "imgUrl": "./near.png",
+      "sales": 10000,
+      "expressLimit": 0,
+      "expressPrice": 5,
+      "slogan": "VIP尊享满89元减4元运费券"
+    },
+    {
+      "_id": "2",
+      "name": "山姆会员商店",
+      "imgUrl": "./near.png",
+      "sales": 2000,
+      "expressLimit": 0,
+      "expressPrice": 5,
+      "slogan": "联合利华洗护满10减5"
+    }
+  ]
+}
