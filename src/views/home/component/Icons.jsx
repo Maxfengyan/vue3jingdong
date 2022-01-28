@@ -1,9 +1,17 @@
 import { defineComponent } from "vue";
+import { useRouter } from "vue-router";
 import style from "@/style/home/icons.module.scss";
 import imgList from "@/utils/imgList";
 const Icons = defineComponent({
   name: "Icons",
   setup() {
+    const router = useRouter();
+    const handleClickDetail = () => {
+      router.push({
+        name: "Shop",
+        params: { id: 1 },
+      });
+    };
     return () => {
       const iconList = [
         {
@@ -51,7 +59,7 @@ const Icons = defineComponent({
         <div class={style.icons}>
           {iconList.map((item) => {
             return (
-              <div class={style["icons-item"]} key={item.name}>
+              <div class={style["icons-item"]} key={item.name} onClick={() => handleClickDetail()}>
                 <img src={item.img} />
                 <p>{item.name}</p>
               </div>

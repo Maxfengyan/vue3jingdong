@@ -28,9 +28,12 @@
 |   |   |— variable.scss             // css 变量
 |   |   |   |— *.scss                // 各个组件css
 |   |— views                         // 页面
-|   |   |— cartList                  // 购物车相关
+|   |   |— cartList                  // 购物车相关(未完成)
+|   |   |— docker                    // navbar底部组件
 |   |   |— home                      // 主页组件
+|   |   |— login                     // 登录页面
 |   |   |— orderConfirm              // 订单确认组件
+|   |   |— orderList                 // 订单列表页面
 |   |   |— register                  // 注册组件
 |   |   |— shop                      // 店铺组件
 |— App.vue                           // 根组件
